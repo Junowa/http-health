@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: http-health
+  labels:
+    app: http-health
+spec:
+  containers:
+  - name: http-health
+    image: artifactory.thalesdigital.io/docker/runnerz/http-health
+    env:
+    - name: HEALTH_URL
+      valueFrom:
+        configMapKeyRef:
+          name: env-config
+          key: health_url
+  imagePullSecrets:
+  - name: regcred
+
